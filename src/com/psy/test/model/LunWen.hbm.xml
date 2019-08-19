@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.LunWen" table="lunwen_table">
+        <id name="lw_id" column="lw_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="lw_name" column="lw_name"/>
+        <property name="lw_bianhao" column="lw_bianhao"/>
+        <property name="lw_zuozhe1" column="lw_zuozhe1"/>
+        <property name="lw_zuozhe2" column="lw_zuozhe2"/>
+        <property name="lw_yema" column="lw_yema"/>
+        <property name="lw_kanwu" column="lw_kanwu"/>
+        <property name="lw_juanhao" column="lw_juanhao"/>
+        <property name="lw_zizhu" column="lw_zizhu"/>
+        <property name="lw_jiansuo" column="lw_jiansuo"/>
+        <property name="lw_shenhe" column="lw_shenhe"/>
+        <property name="lw_image" column="lw_image"/>
+        <property name="lw_imagename" column="lw_imagename"/>
+        <property name="lw_defen" column="lw_defen"/>
+        <property name="stu_lunwen_id" column="stu_lunwen_id"/>
+
+        <many-to-one name="student" column="stu_lunwen_id" class="com.psy.test.model.Student" insert="false" update="false"></many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.KeYan" table="keyan_table">
+        <id name="ky_id" column="ky_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="ky_bianhao" column="ky_bianhao"/>
+        <property name="ky_mingcheng" column="ky_mingcheng"/>
+        <property name="ky_fuzeren" column="ky_fuzeren"/>
+        <property name="ky_laiyuan" column="ky_laiyuan"/>
+        <property name="ky_leixing" column="ky_leixing"/>
+        <property name="ky_dengji" column="ky_dengji"/>
+        <property name="ky_jingfei" column="ky_jingfei"/>
+        <property name="ky_renwu" column="ky_renwu"/>
+        <property name="ky_shenhe" column="ky_shenhe"/>
+        <property name="ky_image" column="ky_image"/>
+        <property name="ky_imagename" column="ky_imagename"/>
+        <property name="ky_defen" column="ky_defen"/>
+        <property name="stu_keyan_id" column="stu_keyan_id"/>
+
+        <many-to-one name="student" column="stu_keyan_id" class="com.psy.test.model.Student" insert="false" update="false"/>
+    </class>
+</hibernate-mapping>

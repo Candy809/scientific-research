@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- ===========================配置Struts2的常量=========================== -->
+    <constant name="struts.action.extension" value="action"/>
+    <constant name="struts.multipart.maxSize" value="5242880"/>
+
+    <package name="psy" extends="struts-default" namespace="/">
+        <!--声明一个登录拦截器-->
+        <interceptors>
+            <interceptor name="Interceptor" class="com.psy.test.web.interceptor.Interceptor">
+                <!-- excludeMethods排除: 不需要拦截 -->
+                <param name="excludeMethods">login,execute</param>
+            </interceptor>
+
+            <!-- 声明一个拦截器组(栈)-->
+            <interceptor-stack name="myDefaultStack">
+                <interceptor-ref name="Interceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <!-- 修改struts默认拦截器-->
+        <default-interceptor-ref name="myDefaultStack"/>
+
+        <!--配置全局的结果视图-->
+        <global-results>
+            <result name="loginerror" type="redirect">/index.jsp</result>
+        </global-results>
+
+
+        <!-- ===========================管理员action=========================== -->
+        <action name="admin_*" class="com.psy.test.web.action.AdminAction" method="{1}">
+            <result name="login">/index.jsp</result>
+            <result name="checkcodeFail">/index.jsp</result>
+            <result name="saveUI">/jsp/admin/admin/admin-tianjia.jsp</result>
+            <result name="ziliaoUI">/jsp/admin/edit.jsp</result>
+            <result name="findAll">/jsp/admin/admin/admin-liebiao.jsp</result>
+            <result name="loginSuccess">/jsp/admin/index.jsp</result>
+            <result name="editSuccess">/jsp/admin/admin/admin-xiugai.jsp</result>
+            <result name="xiugaiSuccess">/index.jsp</result>
+            <result name="saveSuccess" type="redirectAction">admin_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">admin_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">admin_findAll.action</result>
+
+        </action>
+
+        <!-- ===========================学生action=========================== -->
+        <action name="student_*" class="com.psy.test.web.action.StudentAction" method="{1}">
+            <result name="login">/jsp/student/index.jsp</result>
+            <result name="saveUI">/jsp/admin/student/student-tianjia.jsp</result>
+            <result name="ziliaoUI">/jsp/student/edit.jsp</result>
+            <result name="findAll">/jsp/admin/student/student-liebiao.jsp</result>
+            <result name="loginSuccess">/jsp/student/index.jsp</result>
+            <result name="saveSuccess" type="redirectAction">student_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">student_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">student_findAll.action</result>
+            <result name="editSuccess">/jsp/admin/student/student-xiugai.jsp</result>
+            <result name="xiugaiSuccess">/index.jsp</result>
+            <result name="checkcodeFail">/index.jsp</result>
+
+        </action>
+
+        <!-- ===========================老师action=========================== -->
+        <action name="teacher_*" class="com.psy.test.web.action.TeacherAction" method="{1}">
+            <result name="login">/jsp/teacher/index.jsp</result>
+            <result name="checkcodeFail">/index.jsp</result>
+            <result name="saveUI">/jsp/admin/teacher/teacher-tianjia.jsp</result>
+            <result name="ziliaoUI">/jsp/teacher/edit.jsp</result>
+            <result name="findAll">jsp/admin/teacher/teacher-liebiao.jsp</result>
+            <result name="loginSuccess">/jsp/teacher/index.jsp</result>
+            <result name="saveSuccess" type="redirectAction">teacher_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">teacher_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">teacher_findAll.action</result>
+            <result name="editSuccess">/jsp/admin/teacher/teacher-xiugai.jsp</result>
+            <result name="xiugaiSuccess">/index.jsp</result>
+
+        </action>
+
+        <!-- ===========================论文action=========================== -->
+        <action name="lunwen_*" class="com.psy.test.web.action.LunWenAction" method="{1}">
+            <result name="findAll">/jsp/student/lunwen/lunwen-liebiao.jsp</result>
+            <result name="getlunwenAll">/jsp/teacher/lunwen-liebiao.jsp</result>
+            <result name="saveUI">/jsp/student/lunwen/lunwen-tianjia.jsp</result>
+            <result name="shenheUI">/jsp/teacher/lunwen-shenhe.jsp</result>
+            <result name="tubiaoUI">/jsp/student/lunwen/lunwen-tubiao.jsp</result>
+            <result name="editSuccess">/jsp/student/lunwen/lunwen-xiugai.jsp</result>
+            <result name="saveSuccess" type="redirectAction">lunwen_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">lunwen_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">lunwen_findAll.action</result>
+            <result name="lunwenshenheSuccess" type="redirectAction">lunwen_getlunwenAll.action</result>
+            <!-- ===========================文件下载=========================== -->
+            <result name="success" type="stream">
+                <param name="contentType">application/x-jpg</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+                <param name="bufferSize">4096</param>
+            </result>
+            <!-- ===========================文件上传action=========================== -->
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">2097152</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.bmp,.png</param>
+            </interceptor-ref>
+        </action>
+
+        <!-- ===========================专利action=========================== -->
+        <action name="zhuanli_*" class="com.psy.test.web.action.ZhuanLiAction" method="{1}">
+            <result name="findAll">/jsp/student/zhuanli/zhuanli-liebiao.jsp</result>
+            <result name="getzhuanliAll">/jsp/teacher/zhuanli-liebiao.jsp</result>
+            <result name="saveUI">/jsp/student/zhuanli/zhuanli-tianjia.jsp</result>
+            <result name="shenheUI">/jsp/teacher/zhuanli-shenhe.jsp</result>
+            <result name="tubiaoUI">/jsp/student/zhuanli/zhuanli-tubiao.jsp</result>
+            <result name="editSuccess">/jsp/student/zhuanli/zhuanli-xiugai.jsp</result>
+            <result name="saveSuccess" type="redirectAction">zhuanli_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">zhuanli_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">zhuanli_findAll.action</result>
+            <result name="zhuanlishenheSuccess" type="redirectAction">zhuanli_getzhuanliAll.action</result>
+            <!-- ===========================文件下载action=========================== -->
+            <result name="success" type="stream">
+                <param name="contentType">application/x-jpg</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+                <param name="bufferSize">4096</param>
+            </result>
+            <!-- ===========================文件上传action=========================== -->
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">2097152</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.bmp,.png</param>
+            </interceptor-ref>
+        </action>
+
+        <!-- ===========================科研action=========================== -->
+        <action name="keyan_*" class="com.psy.test.web.action.KeYanAction" method="{1}">
+            <result name="findAll">/jsp/student/keyan/keyan-liebiao.jsp</result>
+            <result name="getkeyanAll">/jsp/teacher/keyan-liebiao.jsp</result>
+            <result name="saveUI">/jsp/student/keyan/keyan-tianjia.jsp</result>
+            <result name="shenheUI">/jsp/teacher/keyan-shenhe.jsp</result>
+            <result name="tubiaoUI">/jsp/student/keyan/keyan-tubiao.jsp</result>
+            <result name="editSuccess">/jsp/student/keyan/keyan-xiugai.jsp</result>
+            <result name="saveSuccess" type="redirectAction">keyan_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">keyan_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">keyan_findAll.action</result>
+            <result name="keyanshenheSuccess" type="redirectAction">keyan_getkeyanAll.action</result>
+            <!-- ===========================文件下载action=========================== -->
+            <result name="success" type="stream">
+                <param name="contentType">application/x-jpg</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+                <param name="bufferSize">4096</param>
+            </result>
+            <!-- ===========================文件上传action=========================== -->
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">2097152</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.bmp,.png</param>
+            </interceptor-ref>
+        </action>
+
+        <!-- ===========================学术action=========================== -->
+        <action name="xueshu_*" class="com.psy.test.web.action.XueShuAction" method="{1}">
+            <result name="findAll">/jsp/student/xueshu/xueshu-liebiao.jsp</result>
+            <result name="getxueshuAll">/jsp/teacher/xueshu-liebiao.jsp</result>
+            <result name="saveUI">/jsp/student/xueshu/xueshu-tianjia.jsp</result>
+            <result name="shenheUI">/jsp/teacher/xueshu-shenhe.jsp</result>
+            <result name="tubiaoUI">/jsp/student/xueshu/xueshu-tubiao.jsp</result>
+            <result name="editSuccess">/jsp/student/xueshu/xueshu-xiugai.jsp</result>
+            <result name="saveSuccess" type="redirectAction">xueshu_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">xueshu_findAll.action</result>
+            <result name="updateSuccess" type="redirectAction">xueshu_findAll.action</result>
+            <result name="xueshushenheSuccess" type="redirectAction">xueshu_getxueshuAll.action</result>
+            <!-- ===========================文件下载action=========================== -->
+            <result name="success" type="stream">
+                <param name="contentType">application/x-jpg</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+                <param name="bufferSize">4096</param>
+            </result>
+            <!-- ===========================文件下载action=========================== -->
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">2097152</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.bmp,.png</param>
+            </interceptor-ref>
+        </action>
+
+        <action name="mark_*" class="com.psy.test.web.action.MarkAction" method="{1}">
+            <result name="findAll">/jsp/admin/mark/list-mark.jsp</result>
+            <result name="ky_editUI">/jsp/admin/mark/keyan/edit.jsp</result>
+            <result name="lw_editUI">/jsp/admin/mark/lunwen/edit.jsp</result>
+            <result name="xs_editUI">/jsp/admin/mark/xueshu/edit.jsp</result>
+            <result name="zl_editUI">/jsp/admin/mark/zhuanli/edit.jsp</result>
+            <result name="ky_edit_success" type="redirectAction">mark_findAll.action</result>
+            <result name="lw_edit_success" type="redirectAction">mark_findAll.action</result>
+            <result name="xs_edit_success" type="redirectAction">mark_findAll.action</result>
+            <result name="zl_edit_success" type="redirectAction">mark_findAll.action</result>
+        </action>
+        
+        <action name="stu_check_execute" class="com.psy.test.web.action.stu_CheckImgAction" method="execute">
+        </action>
+        <action name="tea_check_execute" class="com.psy.test.web.action.tea_CheckImgAction" method="execute">
+        </action>
+        <action name="admin_check_execute" class="com.psy.test.web.action.admin_CheckImgAction" method="execute">
+        </action>
+    </package>
+</struts>

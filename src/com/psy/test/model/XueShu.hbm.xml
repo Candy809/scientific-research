@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.psy.test.model.XueShu" table="xueshu_table">
+    <id name="xs_id" column="xs_id">
+        <generator class="native"></generator>
+    </id>
+    <property name="xs_canhuiren" column="xs_canhuiren"/>
+    <property name="xs_huiyimingcheng" column="xs_huiyimingcheng"/>
+    <property name="xs_zhubandanwei" column="xs_zhubandanwei"/>
+    <property name="xs_huiyileixing" column="xs_huiyileixing"/>
+    <property name="xs_xuekemenlei" column="xs_xuekemenlei"/>
+    <property name="xs_canhuidizhi" column="xs_canhuidizhi"/>
+    <property name="xs_tijiaolunwen" column="xs_tijiaolunwen"/>
+    <property name="xs_teyaobaogao" column="xs_teyaobaogao"/>
+    <property name="xs_lunwentimu" column="xs_lunwentimu"/>
+    <property name="xs_baogaotimu" column="xs_baogaotimu"/>
+    <property name="xs_zijinzizhu" column="xs_zijinzizhu"/>
+    <property name="xs_zizhujine" column="xs_zizhujine"/>
+    <property name="xs_shenhe" column="xs_shenhe"/>
+    <property name="xs_image" column="xs_image"/>
+    <property name="xs_imagename" column="xs_imagename"/>
+    <property name="xs_defen" column="xs_defen"/>
+    <property name="stu_xueshu_id" column="stu_xueshu_id"/>
+
+    <many-to-one name="student" column="stu_xueshu_id" class="com.psy.test.model.Student" insert="false" update="false"/>
+</class>
+</hibernate-mapping>

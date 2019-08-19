@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.Admin" table="admin_table">
+        <id name="admin_id" column="admin_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="admin_name" column="admin_name"/>
+        <property name="admin_username" column="admin_username"/>
+        <property name="admin_password" column="admin_password"/>
+        <property name="admin_address" column="admin_address"/>
+        <property name="admin_mobile" column="admin_mobile"/>
+    </class>
+</hibernate-mapping>

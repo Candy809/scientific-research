@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.Teacher" table="teacher_table">
+        <id name="tea_id" column="tea_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="tea_username" column="tea_username"/>
+        <property name="tea_password" column="tea_password"/>
+        <property name="tea_name" column="tea_name"/>
+        <property name="tea_age" column="tea_age"/>
+        <property name="tea_gender" column="tea_gender"/>
+        <property name="tea_mobile" column="tea_mobile"/>
+        <property name="tea_email" column="tea_email"/>
+        <property name="tea_address" column="tea_address"/>
+        <property name="tea_qq" column="tea_qq"/>
+
+    </class>
+</hibernate-mapping>

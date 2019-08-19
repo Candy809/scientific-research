@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.Mark" table="mark_table">
+        <id name="mark_id" column="mark_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="lw_mark_zijinzizhu_zizhu" length="10" column="lw_mark_zijinzizhu_zizhu"/>
+        <property name="lw_mark_zijinzizhu_weizizhu" length="10" column="lw_mark_zijinzizhu_weizizhu"/>
+        <property name="lw_mark_shenhe_tongguo" length="10" column="lw_mark_shenhe_tongguo"/>
+        <property name="lw_mark_shenhe_weitongguo" length="10" column="lw_mark_shenhe_weitongguo"/>
+
+        <property name="ky_mark_leixing_yilei" length="10" column="ky_mark_leixing_yilei"/>
+        <property name="ky_mark_leixing_erlei" length="10" column="ky_mark_leixing_erlei"/>
+        <property name="ky_mark_leixing_fudaoyuan" length="10" column="ky_mark_leixing_fudaoyuan"/>
+        <property name="ky_mark_dengji_guojiaji" length="10" column="ky_mark_dengji_guojiaji"/>
+        <property name="ky_mark_dengji_shentingji" length="10" column="ky_mark_dengji_shentingji"/>
+        <property name="ky_mark_dengji_xiaoji" length="10" column="ky_mark_dengji_xiaoji"/>
+        <property name="ky_mark_shenhe_tongguo" length="10" column="ky_mark_shenhe_tongguo"/>
+        <property name="ky_mark_shenhe_weitongguo" length="10" column="ky_mark_shenhe_weitongguo"/>
+
+        <property name="xs_mark_leixing_guoji" length="10" column="xs_mark_leixing_guoji"/>
+        <property name="xs_mark_leixing_guonei" length="10" column="xs_mark_leixing_guonei"/>
+        <property name="xs_mark_lunwen_tijiao" length="10" column="xs_mark_lunwen_tijiao"/>
+        <property name="xs_mark_lunwen_weitijiao" length="10" column="xs_mark_lunwen_weitijiao"/>
+        <property name="xs_mark_baogao_tijiao" length="10" column="xs_mark_baogao_tijiao"/>
+        <property name="xs_mark_baogao_weitijiao" length="10" column="xs_mark_baogao_weitijiao"/>
+        <property name="xs_mark_zijinzizhu_zizhu" length="10" column="xs_mark_zijinzizhu_zizhu"/>
+        <property name="xs_mark_zijinzizhu_weizizhu" length="10" column="xs_mark_zijinzizhu_weizizhu"/>
+        <property name="xs_mark_shenhe_tongguo" length="10" column="xs_mark_shenhe_tongguo"/>
+        <property name="xs_mark_shenhe_weitongguo" length="10" column="xs_mark_shenhe_weitongguo"/>
+
+        <property name="zl_mark_fanwei_guonei" length="10" column="zl_mark_fanwei_guonei"/>
+        <property name="zl_mark_fanwei_guoji" length="10" column="zl_mark_fanwei_guoji"/>
+        <property name="zl_mark_zhuangtai_shenqing" length="10" column="zl_mark_zhuangtai_shenqing"/>
+        <property name="zl_mark_zhuangtai_gongkai" length="10" column="zl_mark_zhuangtai_gongkai"/>
+        <property name="zl_mark_zhuangtai_shouquan" length="10" column="zl_mark_zhuangtai_shouquan"/>
+        <property name="zl_mark_zhuangtai_shixiao" length="10" column="zl_mark_zhuangtai_shixiao"/>
+        <property name="zl_mark_shenhe_tongguo" length="10" column="zl_mark_shenhe_tongguo"/>
+        <property name="zl_mark_shenhe_weitongguo" length="10" column="zl_mark_shenhe_weitongguo"/>
+    </class>
+</hibernate-mapping>

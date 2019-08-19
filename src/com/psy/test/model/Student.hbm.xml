@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.Student" table="student_table">
+        <id name="stu_id" column="stu_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="stu_username" column="stu_username"/>
+        <property name="stu_password" column="stu_password"/>
+        <property name="stu_name" column="stu_name"/>
+        <property name="stu_age" column="stu_age"/>
+        <property name="stu_gender" column="stu_gender"/>
+        <property name="stu_mobile" column="stu_mobile"/>
+        <property name="stu_email" column="stu_email"/>
+        <property name="stu_address" column="stu_address"/>
+        <property name="stu_class" column="stu_class"/>
+        <property name="stu_qq" column="stu_qq"/>
+
+        <set name="lunWens" cascade="delete" inverse="true">
+            <key column="stu_lunwen_id"></key>
+            <one-to-many class="com.psy.test.model.LunWen"></one-to-many>
+        </set>
+        <set name="zhuanLis" cascade="delete" inverse="true">
+            <key column="stu_zhuanli_id"></key>
+            <one-to-many class="com.psy.test.model.ZhuanLi"></one-to-many>
+        </set>
+        <set name="keYans" cascade="delete" inverse="true">
+            <key column="stu_keyan_id"></key>
+            <one-to-many class="com.psy.test.model.KeYan"></one-to-many>
+        </set>
+        <set name="xueShus" cascade="delete" inverse="true">
+            <key column="stu_xueshu_id"></key>
+            <one-to-many class="com.psy.test.model.XueShu"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

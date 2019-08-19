@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!-- ===========================引入外部属性文件=============================== -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!-- ===========================数据源DataSource=========================== -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- ===========================配置sessionFactory=========================== -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <!-- 注入连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置hibernate相关属性 -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <!-- 引入映射文件 -->
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:com/psy/test/model/*.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- ===========================配置Action=========================== -->
+    <bean class="com.psy.test.web.action.AdminAction" name="adminAction">
+        <property name="adminService" ref="adminService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.StudentAction" name="studentAction">
+        <property name="studentService" ref="studentService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.TeacherAction" name="teacherAction">
+        <property name="teacherService" ref="teacherService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.LunWenAction" name="lunWenAction">
+        <property name="lunWenService" ref="lunWenService"/>
+        <property name="studentService" ref="studentService"/>
+        <property name="markService" ref="markService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.ZhuanLiAction" name="zhuanLiAction">
+        <property name="zhuanLiService" ref="zhuanLiService"/>
+        <property name="studentService" ref="studentService"/>
+        <property name="markService" ref="markService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.KeYanAction" name="keYanAction">
+        <property name="keYanService" ref="keYanService"/>
+        <property name="studentService" ref="studentService"/>
+        <property name="markService" ref="markService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.XueShuAction" name="xueShuAction">
+        <property name="xueShuService" ref="xueShuService"/>
+        <property name="studentService" ref="studentService"/>
+        <property name="markService" ref="markService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.MarkAction" name="markAction">
+        <property name="markService" ref="markService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.EchartAction" name="echartAction">
+        <property name="echartService" ref="echartService"/>
+        <property name="lunWenService" ref="lunWenService"/>
+        <property name="xueShuService" ref="xueShuService"/>
+        <property name="keYanService" ref="keYanService"/>
+        <property name="zhuanLiService" ref="zhuanLiService"/>
+        <property name="studentService" ref="studentService"/>
+    </bean>
+    <bean class="com.psy.test.web.action.stu_CheckImgAction" name="checkImgAction" id="checkImgAction2" scope="prototype"/>
+
+    <!-- ===========================配置Service=========================== -->
+    <bean class="com.psy.test.service.impl.AdminServiceImpl" name="adminService">
+        <property name="adminDao" ref="adminDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.StudentServiceImpl" name="studentService">
+        <property name="studentDao" ref="studentDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.TeacherServiceImpl" name="teacherService">
+        <property name="teacherDao" ref="teacherDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.LunWenServiceImpl" name="lunWenService">
+        <property name="lunWenDao" ref="lunWenDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.ZhuanLiServiceImpl" name="zhuanLiService">
+        <property name="zhuanLiDao" ref="zhuanLiDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.KeYanServiceImpl" name="keYanService">
+        <property name="keYanDao" ref="keYanDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.XueShuServiceImpl" name="xueShuService">
+        <property name="xueShuDao" ref="xueShuDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.MarkServiceImpl" name="markService">
+        <property name="markDao" ref="markDao"/>
+    </bean>
+    <bean class="com.psy.test.service.impl.EchartServiceImpl" name="echartService">
+        <property name="echartDao" ref="echartDao"/>
+    </bean>
+
+    <!-- ===========================配置Dao=========================== -->
+    <bean class="com.psy.test.dao.impl.AdminDaoImpl" name="adminDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.StudentDaoImpl" name="studentDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.TeacherDaoImpl" name="teacherDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.LunWenDaoImpl" name="lunWenDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.ZhuanLiDaoImpl" name="zhuanLiDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.KeYanDaoImpl" name="keYanDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.XueShuDaoImpl" name="xueShuDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.MarkDaoImpl" name="markDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.psy.test.dao.impl.EchartDaoImpl" name="echartDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- ===========================配置事务管理器=========================== -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- ===========================开启注解事务=========================== -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

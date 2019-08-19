@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.psy.test.model.ZhuanLi" table="zhuanli_table">
+        <id name="zl_id" column="zl_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="zl_mingcheng" column="zl_mingcheng"/>
+        <property name="zl_leixing" column="zl_leixing"/>
+        <property name="zl_dengjibianhao" column="zl_dengjibianhao"/>
+        <property name="zl_fanwei" column="zl_fanwei"/>
+        <property name="zl_zhuangtai" column="zl_zhuangtai"/>
+        <property name="zl_shuming" column="zl_shuming"/>
+        <property name="zl_shenqinghao" column="zl_shenqinghao"/>
+        <property name="zl_zhiwu" column="zl_zhiwu"/>
+        <property name="zl_famingren" column="zl_famingren"/>
+        <property name="zl_famingrendanwei" column="zl_famingrendanwei"/>
+        <property name="zl_zhuanlifei" column="zl_zhuanlifei"/>
+        <property name="zl_shenhe" column="zl_shenhe"/>
+        <property name="zl_image" column="zl_image"/>
+        <property name="zl_imagename" column="zl_imagename"/>
+        <property name="zl_defen" column="zl_defen"/>
+        <property name="stu_zhuanli_id" column="stu_zhuanli_id"/>
+
+        <many-to-one name="student" column="stu_zhuanli_id" class="com.psy.test.model.Student" insert="false" update="false"/>
+    </class>
+</hibernate-mapping>
